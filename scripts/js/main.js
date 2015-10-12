@@ -4,7 +4,7 @@ var renderSize = new THREE.Vector2(window.innerWidth, window.innerHeight);
 // var renderSize = new THREE.Vector2(2448,3264);
 var mouse = new THREE.Vector2(0.0,0.0);
 var mouseDown = false;
-var r2 = 1.5;
+var r2 = 1.0;
 var time = 0.0;
 init();
 animate();
@@ -79,6 +79,7 @@ function onMouseMove(event){
 }
 function onMouseDown(){
 	mouseDown = true;
+    gradient.jumpForward();
 }
 function onMouseUp(){
 	mouseDown = false;
