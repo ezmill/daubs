@@ -4,7 +4,7 @@ var renderSize = new THREE.Vector2(window.innerWidth, window.innerHeight);
 // var renderSize = new THREE.Vector2(2448,3264);
 var mouse = new THREE.Vector2(0.0,0.0);
 var mouseDown = false;
-var r2 = 1.0;
+var r2 = 1.5;
 var time = 0.0;
 init();
 animate();
@@ -52,8 +52,8 @@ function init(){
        	// customShaders2.reposShader,
         customShaders.diffShader, 
         customShaders2.reposShader,
-        // customShaders2.sharpenShader 
-        customShaders.paintShader
+        customShaders2.passShader 
+        // customShaders.paintShader
     ];
     fbMaterial = new FeedbackMaterial(renderer, scene, camera, texture, shaders);  
     fbMaterial.init();
@@ -71,8 +71,8 @@ function animate(){
 }
 
 function onMouseMove(event){
-	mouse.x = ( event.pageX / renderSize.x ) * 2 - 1;
-    mouse.y = - ( event.pageY / renderSize.y ) * 2 + 1;
+	// mouse.x = ( event.pageX / renderSize.x ) * 2 - 1;
+    // mouse.y = - ( event.pageY / renderSize.y ) * 2 + 1;
     for(var i = 0; i < fbMaterial.fbos.length; i++){
       // fbMaterial.fbos[i].material.uniforms.mouse.value = new THREE.Vector2(0.01,0.01);
     }
@@ -92,15 +92,15 @@ function draw(){
 		// r2 += 0.005;
 		// r2 = 0.5;
 	// }
-    // mouse.x = ( Math.random()) * 2 - 1;
-    // mouse.y = - ( Math.random()) * 2 + 1;
+    mouse.x = ( Math.random()) * 2 - 1;
+    mouse.y = - ( Math.random()) * 2 + 1;
 
 	for(var i = 0; i < fbMaterial.fbos.length; i++){
 	  fbMaterial.fbos[i].material.uniforms.time.value = time;
 	  if(fbMaterial.fbos[i].material.uniforms["r2"])fbMaterial.fbos[i].material.uniforms["r2"].value = r2;
       // fbMaterial.fbos[i].material.uniforms.mouse.value = new THREE.Vector2(Math.sin(time)*0.01, Math.cos(time)*0.01);
       fbMaterial.fbos[i].material.uniforms.mouse.value = new THREE.Vector2(mouse.x,mouse.y);
-      // fbMaterial.material.uniforms.mouse.value = new THREE.Vector2(window.innerWidth/2, window.innerHeight/2);
+      fbMaterial.material.uniforms.mouse.value = new THREE.Vector2(window.innerWidth/2, window.innerHeight/2);
 
 	}
     gradient.update();

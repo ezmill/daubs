@@ -26,7 +26,7 @@ function Gradient(WIDTH, HEIGHT){
         this.context.fillStyle=this.gradient;
         this.context.fillRect(0,0,this.canvas.width, this.canvas.height);
 
-        // this.hue -= 0.5;
+        this.hue -= 0.1;
     }
 
     this.sampleColors = function(){

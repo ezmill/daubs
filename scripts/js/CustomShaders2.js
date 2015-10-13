@@ -161,17 +161,17 @@ var CustomShaders = function(){
 			"    float am2 = 10.0;",
 
 			"    for( int i=0; i<20; i++ ){",
-			"    	float h  = dot( texture2D(texture, uv*0.1            ).xyz,   vec3(0.333) );",
-			"    	float h1 = dot( texture2D(texture, uv+vec2(e.x,0.0)).xyz, vec3(0.333) );",
-			"    	float h2 = dot( texture2D(texture, uv+vec2(0.0,e.y)).xyz, vec3(0.333) );",
+			"    	float h  = dot( texture2D(texture, uv*0.1       ).xyz, vec3(1.0) );",
+			"    	float h1 = dot( texture2D(texture, uv+vec2(e.x,0.0)).xyz, vec3(1.0) );",
+			"    	float h2 = dot( texture2D(texture, uv+vec2(0.0,e.y)).xyz, vec3(1.0) );",
 			"    	vec2 g = 0.001*vec2( (h-h2), (h-h1) )/e;",
 			// "    	vec2 g = 0.001*vec2( (h1-h), (h2-h) )/e;",
-			"    	vec2 f = g.yx*vec2(30.0*mouse.x, 30.0*mouse.y);",
+			"    	vec2 f = g.yx*vec2(50.0*mouse.x, 50.0*mouse.y);",
 			// "    	vec2 f = g.yx*vec2(-1.0,1.0);",
 
 			"   	g = mix( g, f, am1 );",
 
-			"    	uv += 0.00005*g*am2;",
+			"    	uv -= 0.00005*g*am2;",
 			"    }",
 
 			"    vec3 col2 = texture2D(texture, uv).xyz;",
@@ -485,7 +485,7 @@ var CustomShaders = function(){
 			// "    gl_FragColor = repos;",
 			"  vec3 hsv = rgb2hsv(repos.rgb);",
 
-			"  hsv.r += 0.005;",
+			"  hsv.r += 0.01;",
 			"  //hsv.r = mod(hsv.r, 1.0);",
 			"  hsv.g *= 1.001;",
 			"  // hsv.g = mod(hsv.g, 1.0);",
